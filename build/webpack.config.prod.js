@@ -19,9 +19,13 @@ module.exports = webpackMerge(webpackBase, {
 			}
 		),
 		/*加载把css文件单独分离出来的插件*/
+		//提取单独打包css文件
 		new MiniCssExtractPlugin({
-			filename: 'css/[name].[hash].css',
-			chunkFilename: 'css/[name].[hash:6].css'
-		})
+      filename: 'src.[name].css',
+      chunkFilename: 'src.[contenthash:12].css'  
+    }),
+		new webpack.DefinePlugin({
+      'process.env': require('./prod.env')
+    }),
 	],
 });

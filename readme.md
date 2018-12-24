@@ -50,7 +50,10 @@ npm install extract-text-webpack-plugin@next
 - autoprefixer
 
 拷贝插件
-copy-webpack-plugin
+- copy-webpack-plugin
+
+提取单独打包css文件
+- mini-css-extract-plugin
 
 ## 配置babel
 - babel-loader实现对特定文件类型的处理

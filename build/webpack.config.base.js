@@ -1,8 +1,12 @@
 const path = require('path'); //定义绝对路径
 const htmlWebpackPlugin = require('html-webpack-plugin'); //html模板插件
-const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const copyWebpackPlugin = require('copy-webpack-plugin'); //复制文件  用于一些无法npm的第三方框架ui 但是需要在html模板中添加css框架
-const webpack = require('webpack') //获取内置的webpack
+const webpack = require('webpack'); //获取内置的webpack
+var VueLoaderPlugin = require('vue-loader/lib/plugin');
+
+function resolve (dir) {
+  return path.join(__dirname, '..', dir)
+}
 
 module.exports = {
 	entry: './src/index.js',
@@ -25,10 +29,10 @@ module.exports = {
 			},
 			{
 				test:/\.css$/,
-				use:ExtractTextPlugin.extract({
-					fallback:'style-loader',
-					use:['css-loader','postcss-loader']
-				})
+				use:  [
+					{loader: 'style-loader'},
+					{loader: 'css-loader'}
+				]
 			},
 			{
 				test: /\.html$/,
@@ -62,18 +66,25 @@ module.exports = {
 			},
 			{
 				test: /\.(woff2?|eot|ttf|otf)(\?.*)?$/,
-				loader: 'url-loader',
-				options: {
-					limit: 10000,
-					name: '[name:6].[ext]',
-					outputPath: 'fonts/',
-					publicPath: '../fonts' //同理 所以是基于page文件夹进行相对定位 要设置publicPath绝对路径
-				},
-				exclude: /node_modules/ //excluder排除怼node下的文件的匹配
-
+				loader: 'file-loader'
+				// loader: 'url-loader',
+				// options: {
+				// 	limit: 10000,
+				// 	name: '[name:6].[ext]',
+				// 	outputPath: 'fonts/',
+				// 	publicPath: '../fonts' //同理 所以是基于page文件夹进行相对定位 要设置publicPath绝对路径
+				// },
+				// exclude: /node_modules/ //excluder排除怼node下的文件的匹配
 			}
-
 		]
+	},
+	resolve: {
+		extensions: ['.vue','.js','.css','.json'],
+		alias:{
+			'@': resolve('src'),
+			'assets': resolve('src/assets'),
+			'vue$': 'vue/dist/vue.esm.js'
+		}
 	},
 	plugins: [
     new htmlWebpackPlugin({
@@ -126,9 +137,12 @@ module.exports = {
 			{
 				from: path.resolve(__dirname, '../src/assets'),
 				to: path.resolve(__dirname, '../dist/assets'),
-				force: true
+				force: true,
+				ignore: ['.*']
 			}
 		]),
+
+		new VueLoaderPlugin()
 
 	],
 

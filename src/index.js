@@ -1,14 +1,17 @@
+import Vue from 'vue';
+import App from './App.vue';
+import router from './router';
+import store from './store/index';
+import ElementUI from "element-ui";
+import "element-ui/lib/theme-chalk/index.css";
 
-console.log('帅的发紫');
-// let str = require('./a.js');
-console.log("1+2+3");
+Vue.use(ElementUI);
+Vue.config.productionTip = false;
 
-document.getElementById('app').innerHTML = "webpack 配置成功";
-
-if(module.hot) {
-    module.hot.accept();
-    // module.hot.accept('./a.js', function() {
-    //     let str = require('./a.js');
-    //     document.getElementById('app').innerHTML = str;
-    // })
-}
+new Vue({
+  el: '#app',
+  router,
+  store,
+  components: { App },
+  template: '<App/>'
+})
