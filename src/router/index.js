@@ -6,10 +6,10 @@ Vue.use(Router)
 const router =  new Router({
   mode: "hash",
   routes: [
-    {
-      path: "/",
-      redirect: "/login"
-    },
+    // {
+    //   path: "/",
+    //   redirect: "/login"
+    // },
     {
       path: '/login',
       name: 'Login',
@@ -17,25 +17,25 @@ const router =  new Router({
     }
   ]
 })
-router.beforeEach((to, from, next) => {
-  console.log('to',to);
-  console.log('form',from);
-  // if (JSON.stringify(to.query) !== "{}" && from.fullPath == "/") {
-  //   Object.keys(to.query).forEach(el => {
-  //     if (el == "rt_url") {
-  //       sessionStorage.itokens = `http://${Base64.atob(to.query["rt_url"])}`;
-  //     }
-  //   });
+// router.beforeEach((to, from, next) => {
+//   console.log('to',to);
+//   console.log('form',from);
+//   if (JSON.stringify(to.query) !== "{}" && from.fullPath == "/") {
+//     Object.keys(to.query).forEach(el => {
+//       if (el == "rt_url") {
+//         sessionStorage.itokens = `http://${Base64.atob(to.query["rt_url"])}`;
+//       }
+//     });
 
-  //   req.systemTabLogin();
-  // }
+//     req.systemTabLogin();
+//   }
 
-  // if (to.name === "login" ) {
-  //   next();
-  // } else {
-  //   router.push("/login");
-  // }
-});
+//   if (to.name === "login" ) {
+//     next();
+//   } else {
+//     router.push("/login");
+//   }
+// });
 
 export default router;
 

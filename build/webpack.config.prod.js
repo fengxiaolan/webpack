@@ -7,7 +7,6 @@ const cleanWebpackPlugin = require('clean-webpack-plugin'); //每次清楚dist�
 
 module.exports = webpackMerge(webpackBase, {
 	mode: "production",
-	module: {},
 	plugins: [
 		/*每次进行打包的时候都把dist文件的内容进行清除*/
 		new cleanWebpackPlugin(

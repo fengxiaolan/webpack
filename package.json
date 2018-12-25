@@ -5,8 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "set NODE_ENV=development && webpack-dev-server --inline --hot --open --progress",
-    "build": "set NODE_ENV=production && webpack  -p --progress --config webpack.config.js"
+    "utils": "webpack  -p --progress --config webpack.config.js",
+    "start": "webpack-dev-server --inline --hot --open --progress --config build/webpack.config.dev.js",
+    "dev": "cross-env && set NODE_ENV=development && npm run utils",
+    "build": "cross-env && set NODE_ENV=production && npm run utils"
   },
   "repository": {
     "type": "git",
